@@ -1,21 +1,30 @@
 # 🚀 Makefile para E-commerce Product Service
-.PHONY: help install init clean seed server test
+.PHONY: help install init clean seed server test venv
 
 # Variables
 VENV = venv
 PYTHON = $(VENV)/bin/python
 PIP = $(VENV)/bin/pip
 
+venv: ## 🐍 Crear virtual environment
+	@if [ ! -d "$(VENV)" ]; then \
+		echo "🐍 Creando virtual environment..."; \
+		python3 -m venv $(VENV); \
+		echo "✅ Virtual environment creado"; \
+	else \
+		echo "✅ Virtual environment ya existe"; \
+	fi
+
 help: ## 📋 Mostrar ayuda
 	@echo "🚀 E-commerce Product Service - Comandos disponibles:"
 	@echo ""
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
 
-install: ## 📦 Instalar dependencias
+install: venv ## 📦 Instalar dependencias
 	@echo "📦 Instalando dependencias..."
 	$(PIP) install -r requirements-dev.txt
 
-init: ## 🔧 Inicializar proyecto completo (DB + datos)
+init: install ## 🔧 Inicializar proyecto completo (DB + datos)
 	@echo "🚀 Inicializando proyecto..."
 	$(PYTHON) scripts/init_project.py
 

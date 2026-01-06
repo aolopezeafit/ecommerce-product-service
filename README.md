@@ -9,8 +9,8 @@ Microservicio para la gestión de productos en un sistema de e-commerce, desarro
 ![Status](https://img.shields.io/badge/Status-En%20Desarrollo-yellow)
 ![Docker](https://img.shields.io/badge/Docker-Ready-blue)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue)
+![License](https://img.shields.io/github/license/santiagogracianod/ecommerce-product-service)
 <!--![Security](https://img.shields.io/badge/Security-OWASP%20Top%2010-brightgreen)-->
-<!--![License]()-->
 ---
 
 ## 🚀 Características
@@ -162,14 +162,6 @@ P**Posibles librerías para futuro:**
 3. **Variables de entorno requeridas:**
    - `DATABASE_URL` - Conexión a PostgreSQL
 
-## 🏃 Ejecución en desarrollo
-
-```bash
-uvicorn app.main:app --reload
-```
-
-Accede a la documentación interactiva en [http://localhost:8000/docs](http://localhost:8000/docs).
-
 ---
 
 ## 🎯 Comandos Makefile
@@ -201,6 +193,15 @@ make help
 ```
 
 ---
+
+## 🏃 Ejecución en desarrollo
+
+```bash
+uvicorn app.main:app --reload
+```
+
+Accede a la documentación interactiva en [http://localhost:8000/docs](http://localhost:8000/docs).
+
 ## 🐳 Docker
 
 1. **Construye la imagen**
@@ -257,3 +258,10 @@ flake8 .
 - **Docker** (opcional)
 - **PostgreSQL** (opcional, para persistencia)
 - **Linux, macOS o Windows**
+
+---
+
+## 📄 Licencia
+
+- Este proyecto está licenciado bajo **GPL-3.0** (GNU General Public License v3).
+- Consulta el texto completo en [LICENSE](LICENSE).
