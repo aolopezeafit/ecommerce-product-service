@@ -4,11 +4,14 @@
 	"service": "app",
 	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 	"features": {
-		"ghcr.io/azure/azure-dev/azd:latest": {}
+		"ghcr.io/azure/azure-dev/azd:latest": {},
+		"docker-in-docker": {
+            "version": "latest",
+            "moby": false
+        }
 	},
 	"customizations": {
 		"vscode": {
-			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
 				"ms-azuretools.azure-dev",
 				"ms-python.python",
@@ -23,7 +26,7 @@
 						"name": "Container database",
 						"driver": "PostgreSQL",
 						"previewLimit": 50,
-						"server": "localhost",
+						"server": "db",
 						"port": 5432,
 						"database": "app",
 						"username": "app_user",
@@ -51,15 +54,12 @@
 			}
 		}
 	},
-	// Use 'forwardPorts' to make a list of ports inside the container available locally. 
 	"forwardPorts": [
         8000,
         5432,
         6379
     ],
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "pip install -r requirements.txt",
-	"postCreateCommand": "rm -f .git/hooks/pre-push",
+	"postCreateCommand": "pip install -r requirements-dev.txt && rm -f .git/hooks/pre-push",
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
 }

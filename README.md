@@ -9,8 +9,8 @@ Microservicio para la gestión de productos en un sistema de e-commerce, desarro
 ![Status](https://img.shields.io/badge/Status-En%20Desarrollo-yellow)
 ![Docker](https://img.shields.io/badge/Docker-Ready-blue)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue)
+![License](https://img.shields.io/github/license/santiagogracianod/ecommerce-product-service)
 <!--![Security](https://img.shields.io/badge/Security-OWASP%20Top%2010-brightgreen)-->
-<!--![License]()-->
 ---
 
 ## 🚀 Características
@@ -112,13 +112,13 @@ Para más informacion mirar la [Wiki](https://github.com/RickContreras/ecommerce
 
 2. **Crea y activa un entorno virtual**
    ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
+   python3 -m venv venv
+   source venv/bin/activate
    ```
 
 3. **Instala las dependencias**
    ```bash
-   pip install -r requirements-devI.txt
+   pip install -r requirements-dev.txt
    ```
 
 ### 📦 Dependencias Python principales *(En desarrollo)*
@@ -160,33 +160,7 @@ P**Posibles librerías para futuro:**
    ```
 
 3. **Variables de entorno requeridas:**
-   - `DATABASE_URL` - Conexión a PostgreSQL## 🔐 Configuración de Seguridad
-
-**⚠️ IMPORTANTE**: Este proyecto NO incluye credenciales reales por seguridad.
-
-### Primera configuración:
-
-1. **Genera credenciales seguras:**
-   ```bash
-   python scripts/generate_secrets.py template
-   ```
-
-2. **Copia y personaliza tu configuración:**
-   ```bash
-   cp .env.example .env
-   # Edita .env con tus credenciales reales
-   ```
-
-3. **Variables de entorno requeridas:**
    - `DATABASE_URL` - Conexión a PostgreSQL
-
-## 🏃 Ejecución en desarrollo
-
-```bash
-uvicorn app.main:app --reload
-```
-
-Accede a la documentación interactiva en [http://localhost:8000/docs](http://localhost:8000/docs).
 
 ---
 
@@ -219,17 +193,59 @@ make help
 ```
 
 ---
+
+## 🏃 Ejecución en desarrollo
+
+```bash
+uvicorn app.main:app --reload
+```
+
+Accede a la documentación interactiva en:
+- 📚 **Swagger UI**: [http://localhost:8000/docs](http://localhost:8000/docs)
+- 📘 **ReDoc**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
+
 ## 🐳 Docker
 
-1. **Construye la imagen**
-   ```bash
-   docker build -t ecommerce-product-service .
-   ```
+### Opción 1: Construir y ejecutar localmente (sin BD)
 
-2. **Ejecuta el contenedor**
-   ```bash
-   docker run -p 8000:8000 ecommerce-product-service
-   ```
+Para desarrollo rápido sin dependencias externas:
+
+```bash
+# Construir la imagen
+docker build -t ecommerce-product-service .
+
+# Ejecutar el contenedor accediendo a la BD local
+docker run -d \
+  --name ecommerce-api \
+  --network host \
+  -e DATABASE_URL="postgresql://app_user:app_password@localhost:5432/app" \
+  -p 8000:8000 \
+  ecommerce-product-service
+```
+
+Accede a `http://localhost:8000`
+
+### Opción 2: Ejecutar solo la API (producción)
+
+Si tienes PostgreSQL en otro lugar:
+
+```bash
+docker run -d \
+  --name ecommerce-api \
+  -e DATABASE_URL="postgresql://usuario:contraseña@host:5432/base_datos" \
+  -p 8000:8000 \
+  ecommerce-product-service
+```
+
+### Verificar que funciona
+
+```bash
+# Ver logs
+docker logs ecommerce-api
+
+# Probar la API
+curl http://localhost:8000/health
+```
 
 ---
 
@@ -269,20 +285,14 @@ flake8 .
 
 ---
 
-## 📝 Requisitos
-
-- **Python 3.12.1**
+- **Python 3.12.***
 - **Docker** (opcional)
 - **PostgreSQL** (opcional, para persistencia)
 - **Linux, macOS o Windows**
 
 ---
 
-## 🤝 Contribuciones
+## 📄 Licencia
 
-¡Las contribuciones son bienvenidas!  
-Por favor, abre un issue o envía un pull request siguiendo las [buenas prácticas de Git y Conventional Commits](https://www.conventionalcommits.org/es/v1.0.0/).
-
----
-
-> Desarrollado por [RickContreras](https://github.com/RickContreras)
+- Este proyecto está licenciado bajo **GPL-3.0** (GNU General Public License v3).
+- Consulta el texto completo en [LICENSE](LICENSE).
