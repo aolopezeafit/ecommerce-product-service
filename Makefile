@@ -2,7 +2,7 @@
 .PHONY: help install init clean seed server test
 
 # Variables
-VENV = .venv
+VENV = venv
 PYTHON = $(VENV)/bin/python
 PIP = $(VENV)/bin/pip
 
@@ -21,7 +21,7 @@ init: ## 🔧 Inicializar proyecto completo (DB + datos)
 
 clean: ## 🗑️ Limpiar base de datos
 	@echo "🗑️ Limpiando base de datos..."
-	$(PYTHON) -c "import psycopg2; conn = psycopg2.connect(host='localhost', port=5432, database='app', user='app_user', password='app_password'); cursor = conn.cursor(); cursor.execute('DELETE FROM products;'); conn.commit(); conn.close(); print('✅ Base de datos limpiada')"
+	$(PYTHON) -c "import psycopg2; conn = psycopg2.connect(host='db', port=5432, database='app', user='app_user', password='app_password'); cursor = conn.cursor(); cursor.execute('DELETE FROM products;'); conn.commit(); conn.close(); print('✅ Base de datos limpiada')"
 
 seed: ## 🌱 Poblar base de datos con productos
 	@echo "🌱 Poblando base de datos..."
@@ -47,7 +47,7 @@ test: ## 🧪 Ejecutar tests
 status: ## 📊 Mostrar estado del proyecto
 	@echo "📊 Estado del proyecto:"
 	@echo "  🗄️  Base de datos:"
-	@$(PYTHON) -c "import psycopg2; conn = psycopg2.connect(host='localhost', port=5432, database='app', user='app_user', password='app_password'); cursor = conn.cursor(); cursor.execute('SELECT COUNT(*) FROM products;'); print(f'     Productos: {cursor.fetchone()[0]}'); conn.close()" 2>/dev/null || echo "     ❌ No conectada"
+	@$(PYTHON) -c "import psycopg2; conn = psycopg2.connect(host='db', port=5432, database='app', user='app_user', password='app_password'); cursor = conn.cursor(); cursor.execute('SELECT COUNT(*) FROM products;'); print(f'     Productos: {cursor.fetchone()[0]}'); conn.close()" 2>/dev/null || echo "     ❌ No conectada"
 	@echo "  🌐 API:"
 	@curl -s http://localhost:8000/api/v1/products/ > /dev/null 2>&1 && echo "     ✅ Funcionando (http://localhost:8000)" || echo "     ❌ No disponible"
 

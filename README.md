@@ -112,13 +112,13 @@ Para más informacion mirar la [Wiki](https://github.com/RickContreras/ecommerce
 
 2. **Crea y activa un entorno virtual**
    ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
+   python3 -m venv venv
+   source venv/bin/activate
    ```
 
 3. **Instala las dependencias**
    ```bash
-   pip install -r requirements-devI.txt
+   pip install -r requirements-dev.txt
    ```
 
 ### 📦 Dependencias Python principales *(En desarrollo)*
@@ -160,7 +160,7 @@ P**Posibles librerías para futuro:**
    ```
 
 3. **Variables de entorno requeridas:**
-   - `DATABASE_URL` - Conexión a PostgreSQL## 🔐 Configuración de Seguridad
+   - `DATABASE_URL` - Conexión a PostgreSQL
 
 **⚠️ IMPORTANTE**: Este proyecto NO incluye credenciales reales por seguridad.
 
@@ -271,18 +271,7 @@ flake8 .
 
 ## 📝 Requisitos
 
-- **Python 3.12.1**
+- **Python 3.12.***
 - **Docker** (opcional)
 - **PostgreSQL** (opcional, para persistencia)
 - **Linux, macOS o Windows**
-
----
-
-## 🤝 Contribuciones
-
-¡Las contribuciones son bienvenidas!  
-Por favor, abre un issue o envía un pull request siguiendo las [buenas prácticas de Git y Conventional Commits](https://www.conventionalcommits.org/es/v1.0.0/).
-
----
-
-> Desarrollado por [RickContreras](https://github.com/RickContreras)

@@ -37,7 +37,7 @@ def main():
     try:
         import psycopg2
         conn = psycopg2.connect(
-            host='localhost',
+            host='db',
             port=5432,
             database='app',
             user='app_user',
