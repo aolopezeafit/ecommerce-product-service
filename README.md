@@ -162,24 +162,6 @@ P**Posibles librerías para futuro:**
 3. **Variables de entorno requeridas:**
    - `DATABASE_URL` - Conexión a PostgreSQL
 
-**⚠️ IMPORTANTE**: Este proyecto NO incluye credenciales reales por seguridad.
-
-### Primera configuración:
-
-1. **Genera credenciales seguras:**
-   ```bash
-   python scripts/generate_secrets.py template
-   ```
-
-2. **Copia y personaliza tu configuración:**
-   ```bash
-   cp .env.example .env
-   # Edita .env con tus credenciales reales
-   ```
-
-3. **Variables de entorno requeridas:**
-   - `DATABASE_URL` - Conexión a PostgreSQL
-
 ## 🏃 Ejecución en desarrollo
 
 ```bash
