@@ -3,19 +3,16 @@ from pydantic_settings import BaseSettings
 from typing import Optional, List
 
 class Settings(BaseSettings):
-    # Database - SIN valores por defecto inseguros
-    database_url: str
+    # Database - Con valores por defecto para desarrollo
+    database_url: str = "postgresql://app_user:app_password@localhost:5432/app"
     
     # API
     api_title: str = "Ecommerce Product Service"
     api_version: str = "1.0.0"
     api_description: str = "Microservicio para gestión de productos"
     
-    # Security
-    # secret_key: str = secrets.token_urlsafe(32)  # Genera una clave aleatoria por defecto
-
-    # Security - SIN claves por defecto
-    secret_key: str
+    # Security - Con claves por defecto para desarrollo
+    secret_key: str = "dev-secret-key-change-in-production-12345"
     algorithm: str = "HS256"
     access_token_expire_minutes: int = 30
     

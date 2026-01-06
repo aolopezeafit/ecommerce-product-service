@@ -200,19 +200,52 @@ make help
 uvicorn app.main:app --reload
 ```
 
-Accede a la documentación interactiva en [http://localhost:8000/docs](http://localhost:8000/docs).
+Accede a la documentación interactiva en:
+- 📚 **Swagger UI**: [http://localhost:8000/docs](http://localhost:8000/docs)
+- 📘 **ReDoc**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
 
 ## 🐳 Docker
 
-1. **Construye la imagen**
-   ```bash
-   docker build -t ecommerce-product-service .
-   ```
+### Opción 1: Construir y ejecutar localmente (sin BD)
 
-2. **Ejecuta el contenedor**
-   ```bash
-   docker run -p 8000:8000 ecommerce-product-service
-   ```
+Para desarrollo rápido sin dependencias externas:
+
+```bash
+# Construir la imagen
+docker build -t ecommerce-product-service .
+
+# Ejecutar el contenedor accediendo a la BD local
+docker run -d \
+  --name ecommerce-api \
+  --network host \
+  -e DATABASE_URL="postgresql://app_user:app_password@localhost:5432/app" \
+  -p 8000:8000 \
+  ecommerce-product-service
+```
+
+Accede a `http://localhost:8000`
+
+### Opción 2: Ejecutar solo la API (producción)
+
+Si tienes PostgreSQL en otro lugar:
+
+```bash
+docker run -d \
+  --name ecommerce-api \
+  -e DATABASE_URL="postgresql://usuario:contraseña@host:5432/base_datos" \
+  -p 8000:8000 \
+  ecommerce-product-service
+```
+
+### Verificar que funciona
+
+```bash
+# Ver logs
+docker logs ecommerce-api
+
+# Probar la API
+curl http://localhost:8000/health
+```
 
 ---
 
@@ -251,8 +284,6 @@ flake8 .
 | DELETE | `/api/v1/products/{uuid}`    | Eliminar producto              |
 
 ---
-
-## 📝 Requisitos
 
 - **Python 3.12.***
 - **Docker** (opcional)
