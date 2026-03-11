@@ -15,6 +15,12 @@ class ProductsImporter:
 
         print(f"The Number of Rows are {df.shape[0]}, and columns are {df.shape[1]}.")
 
+        df = df.drop_duplicates(subset="product_id", keep="first")
+        print(f"Rows after removing duplicates: {df.shape[0]}")
+        
+
+        df['category'] = df['category'].str.replace('|', ', ')
+
         df['discounted_price'] = df['discounted_price'].str.replace("₹",'')
         df['discounted_price'] = df['discounted_price'].str.replace(",",'')
         df['discounted_price'] = df['discounted_price'].astype('float64')
@@ -45,6 +51,7 @@ class ProductsImporter:
 
         for _, row in df.iterrows():
             product = {
+                "id": row.get("product_id"),
                 "name": row.get("product_name"),
                 "description": row.get("about_product"),
                 "price": Decimal(str(row.get("discounted_price"))),
