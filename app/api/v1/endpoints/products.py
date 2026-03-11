@@ -23,8 +23,12 @@ def list_products(
     limit: int = 100,
     db: Session = Depends(get_db)
 ):
-    service = ProductService(db)
-    return service.get_all_products(skip, limit)
+    try:
+        service = ProductService(db)
+        rec = service.get_all_products(skip, limit)
+        return rec
+    except Exception as e:
+        raise e
 
 @router.get("/{product_id}", response_model=ProductSchema)
 def get_product(
