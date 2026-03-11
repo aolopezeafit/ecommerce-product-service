@@ -9,3 +9,9 @@ alembic==1.16.5
 uvloop==0.21.0
 watchfiles==1.1.0
 httptools==0.6.4
+
+pandas==2.2.2 
+numpy
+matplotlib
+seaborn
+scipy

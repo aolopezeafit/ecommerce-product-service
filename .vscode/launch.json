@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug FastAPI (uvicorn, breakpoints)",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "app.main:app",
+                "--host", "0.0.0.0",
+                "--port", "8000"
+            ],
+            "justMyCode": true,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python Debugger: Seed",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "scripts/seed_data.py",
+            "console": "integratedTerminal"
+        }
+    ]
+}
